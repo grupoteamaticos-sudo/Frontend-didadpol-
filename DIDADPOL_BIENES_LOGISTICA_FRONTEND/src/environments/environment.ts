@@ -1,4 +1,4 @@
 export const environment = {
-  production: true,
+  production: false,
   apiUrl: 'https://backend-didadpol.onrender.com/api' // URL de Render
 };
