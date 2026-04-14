@@ -1,0 +1,72 @@
+.main-container {
+  padding: 2rem;
+  background: #f8f9fc;
+}
+
+.header-section {
+  margin-bottom: 2rem;
+  h2 { color: #003366; margin: 0; }
+  p { color: #666; }
+}
+
+.grid-layout {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: 2rem;
+  @media (max-width: 992px) { grid-template-columns: 1fr; }
+}
+
+.card {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  h3 { margin-top: 0; color: #333; font-size: 1.1rem; border-bottom: 2px solid #f1f1f1; padding-bottom: 0.5rem; }
+}
+
+.form-group {
+  margin-bottom: 1rem;
+  label { display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 0.5rem; color: #444; }
+  input, select, textarea {
+    width: 100%;
+    padding: 0.7rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    &:focus { border-color: #003366; outline: none; }
+  }
+}
+
+.form-row { display: flex; gap: 1rem; }
+
+/* BOTÓN */
+.btn-submit {
+  width: 100%;
+  background: linear-gradient(135deg, #f4a62a, #ffcc70);
+  border: none;
+  padding: 0.8rem;
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+/* Estilos de la tabla D2 */
+.table-container {
+  overflow-x: auto;
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    th { text-align: left; padding: 1rem; color: #888; font-size: 0.8rem; text-transform: uppercase; }
+    td { padding: 1rem; border-bottom: 1px solid #f8f9fc; font-size: 0.9rem; }
+  }
+}
+
+.status-badge {
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: bold;
+  &.pendiente { background: #fff3cd; color: #856404; }
+  &.aprobado { background: #d4edda; color: #155724; }
+}

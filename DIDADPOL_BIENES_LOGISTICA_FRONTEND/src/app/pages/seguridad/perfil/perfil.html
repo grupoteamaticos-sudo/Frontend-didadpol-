@@ -1,0 +1,73 @@
+<div class="card">
+
+  <h3>Perfil de Usuario</h3>
+
+  <!-- SELECT -->
+  <div class="perfil-top">
+    <select [(ngModel)]="usuarioSeleccionado">
+      <option value="">Seleccione usuario</option>
+
+      <option *ngFor="let u of usuarios" [value]="u.id">
+        {{ u.username }}
+      </option>
+    </select>
+
+    <button class="btn" (click)="buscar()">Buscar</button>
+  </div>
+
+  <div class="msg err" *ngIf="err">{{ err }}</div>
+
+  <!-- PERFIL -->
+  <div class="perfil" *ngIf="perfil as p">
+
+    <!-- USUARIO -->
+    <div class="perfil-section">
+      <h4>Información de Usuario</h4>
+
+      <div class="grid">
+        <div><b>ID:</b> {{ p.id_usuario }}</div>
+        <div><b>Usuario:</b> {{ p.nombre_usuario }}</div>
+        <div><b>Email:</b> {{ p.correo_login }}</div>
+        <div>
+          <b>Estado:</b>
+          <span class="badge" [ngClass]="p.estado_usuario === 'ACTIVO' ? 'ok' : 'warn'">
+            {{ p.estado_usuario }}
+          </span>
+        </div>
+        <div>
+          <b>Rol:</b>
+          <span class="badge ok">
+            {{ p.nombre_rol }}
+          </span>
+        </div>
+        <div><b>Fecha Registro:</b> {{ p.fecha_registro | date:'yyyy-MM-dd HH:mm' }}</div>
+      </div>
+    </div>
+
+    <!-- PERSONA -->
+    <div class="perfil-section">
+      <h4>Información Personal</h4>
+
+      <div class="grid">
+        <div><b>Nombres:</b> {{ p.primer_nombre }} {{ p.segundo_nombre || '' }}</div>
+        <div><b>Apellidos:</b> {{ p.primer_apellido }} {{ p.segundo_apellido || '' }}</div>
+        <div><b>Identidad:</b> {{ p.identidad }}</div>
+        <div><b>Teléfono:</b> {{ p.telefono || '—' }}</div>
+        <div><b>Sexo:</b> {{ p.sexo }}</div>
+      </div>
+    </div>
+
+    <!-- EMPLEADO -->
+    <div class="perfil-section">
+      <h4>Información Laboral</h4>
+
+      <div class="grid">
+        <div><b>Código:</b> {{ p.codigo_empleado }}</div>
+        <div><b>Departamento:</b> {{ p.nombre_departamento }}</div>
+        <div><b>Fecha Ingreso:</b> {{ p.fecha_ingreso || '—' }}</div>
+      </div>
+    </div>
+
+  </div>
+
+</div>

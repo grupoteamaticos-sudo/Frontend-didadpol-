@@ -1,0 +1,144 @@
+<div class="page">
+  <h1>Inventario + Reservas</h1>
+  <p class="sub">Consultá stock por bodega y creá reservas.</p>
+
+  <div class="alerts" *ngIf="msg || err">
+    <div class="ok" *ngIf="msg">{{ msg }}</div>
+    <div class="bad" *ngIf="err">{{ err }}</div>
+  </div>
+
+  <!-- 🔥 PRIMERA FILA -->
+  <div class="grid-top">
+
+    <!-- CREAR -->
+    <div class="card">
+      <h2>Nueva reserva</h2>
+
+      <form class="form" [formGroup]="form" (ngSubmit)="submit()">
+
+        <label>Bodega</label>
+        <select formControlName="warehouseId">
+          <option value="">Seleccioná bodega</option>
+          <option *ngFor="let w of warehouses" [value]="w.id">
+            {{ w.name }}
+          </option>
+        </select>
+
+        <label>Bien</label>
+        <select formControlName="itemId">
+          <option value="">Seleccioná un bien</option>
+          <option *ngFor="let i of items" [value]="i.id">
+            {{ i.name }}
+          </option>
+        </select>
+
+        <div class="hint" *ngIf="selectedWarehouseId() && selectedItemId()">
+          Stock disponible:
+          <b>{{ stock(selectedWarehouseId(), selectedItemId()) }}</b>
+        </div>
+
+        <label>Cantidad</label>
+        <input type="number" min="1" formControlName="qty" />
+
+        <label>Solicitante</label>
+        <input type="text" formControlName="solicitante" />
+
+        <label>Motivo</label>
+        <input type="text" formControlName="motivo" />
+
+        <button class="btn" type="submit">Crear reserva</button>
+
+      </form>
+    </div>
+
+    <!-- RESERVAS -->
+    <div class="card">
+      <h2>Reservas actuales</h2>
+
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Bodega</th>
+            <th>Bien</th>
+            <th>Cantidad</th>
+            <th>Estado</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let r of reservas"
+              (click)="selectReserva(r)"
+              [class.selected]="selectedReserva === r">
+
+            <td>{{ getWarehouseName(r.id_bodega) }}</td>
+            <td>{{ getItemName(r.id_bien) }}</td>
+            <td>{{ r.cantidad }}</td>
+            <td>
+              <span class="badge b--activa">{{ r.estado }}</span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="acciones-globales">
+        <button class="btn"
+          (click)="liberarSeleccionada()"
+          [disabled]="!selectedReserva">
+          Liberar
+        </button>
+
+        <button class="btn"
+          (click)="consumirSeleccionada()"
+          [disabled]="!selectedReserva">
+          Consumir
+        </button>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- 🔥 SEGUNDA FILA (HISTORIAL FULL WIDTH) -->
+  <div class="card full">
+    <h2>Historial de reservas</h2>
+
+    <div class="tableWrap">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Bodega</th>
+            <th>Bien</th>
+            <th>Cantidad</th>
+            <th>Acción</th>
+            <th>Fecha</th>
+            <th>Usuario</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let h of historial">
+            <td>{{ getWarehouseName(h.id_bodega) }}</td>
+            <td>{{ getItemName(h.id_bien) }}</td>
+            <td>{{ h.cantidad }}</td>
+
+            <td>
+              <span
+                class="badge"
+                [ngClass]="{
+                  'b--crear': h.accion === 'RESERVAR',
+                  'b--liberar': h.accion === 'LIBERAR',
+                  'b--consumir': h.accion === 'CONSUMIR'
+                }"
+              >
+                {{ h.accion }}
+              </span>
+            </td>
+
+            <td>{{ h.fecha | date:'short' }}</td>
+            <td>{{ h.usuario }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>

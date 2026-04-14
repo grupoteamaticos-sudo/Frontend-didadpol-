@@ -1,0 +1,99 @@
+<div class="grid">
+
+  <div class="card">
+    <h3>Crear usuario</h3>
+
+    <div class="msg ok" *ngIf="msg">{{ msg }}</div>
+    <div class="msg err" *ngIf="err">{{ err }}</div>
+
+    <form class="form" [formGroup]="form" (ngSubmit)="submit()">
+
+      <!-- EMPLEADO -->
+      <label>
+        Empleado
+
+        <input
+          type="text"
+          placeholder="Buscar empleado..."
+          (input)="filtrarEmpleados($event)"
+        />
+
+        <select
+          formControlName="id_empleado"
+          (change)="onEmpleadoChange($event)"
+        >
+          <option value="">Seleccione</option>
+
+          <option *ngFor="let e of empleadosFiltrados" [value]="e.id_empleado">
+            {{ e.codigo_empleado }} - {{ e.nombre }}
+          </option>
+        </select>
+      </label>
+
+      <!-- USUARIO -->
+      <label>
+        Usuario
+        <input type="text" formControlName="nombre_usuario" />
+      </label>
+
+      <!-- EMAIL -->
+      <label>
+        Email
+        <input type="text" formControlName="correo_login" />
+      </label>
+
+      <!-- PASSWORD -->
+      <label>
+        Contraseña
+        <input type="password" formControlName="password" />
+      </label>
+
+      <!-- ROL -->
+      <label>
+        Rol
+        <select formControlName="id_rol">
+          <option value="">—</option>
+          <option *ngFor="let r of rolesCatalogo" [value]="r.id">
+            {{ r.name }}
+          </option>
+        </select>
+      </label>
+
+      <button class="btn" type="submit">Guardar</button>
+    </form>
+  </div>
+
+  <!-- LISTADO -->
+  <div class="card">
+    <h3>Listado</h3>
+
+    <table class="tbl">
+      <thead>
+        <tr>
+          <th>ID Empleado</th>
+          <th>Usuario</th>
+          <th>Email</th>
+          <th>Roles</th>
+          <th>Estado</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let u of usuarios">
+          <td>{{ u.idEmpleado }}</td>
+          <td>{{ u.username }}</td>
+          <td>{{ u.email }}</td>
+          <td>{{ u.roles[0]?.name || '—' }}</td>
+          <td>{{ u.activo ? 'Activo' : 'Inactivo' }}</td>
+          <td>
+            <button class="btn btn--line" (click)="toggle(u)">Bloquear</button>
+            <button class="btn btn--danger" (click)="delete(u)">Inactivar</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+

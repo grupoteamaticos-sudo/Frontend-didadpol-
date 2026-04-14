@@ -1,0 +1,105 @@
+.modulo-container {
+  padding: 25px;
+  background: #f4f6f9;
+  min-height: 100vh;
+}
+
+/* HEADER */
+.header h2 {
+  font-size: 26px;
+  font-weight: bold;
+}
+
+.header p {
+  color: #777;
+  margin-bottom: 20px;
+}
+
+/* LAYOUT */
+.contenido {
+  display: flex;
+  gap: 25px;
+}
+
+/* CARDS */
+.card {
+  background: white;
+  padding: 20px;
+  border-radius: 14px;
+  flex: 1;
+  box-shadow: 0px 6px 18px rgba(0,0,0,0.05);
+}
+
+/* FORM */
+.formulario {
+  max-width: 350px;
+}
+
+.campo {
+  margin-bottom: 15px;
+}
+
+.campo label {
+  font-weight: 600;
+  margin-bottom: 5px;
+  display: block;
+}
+
+/* INPUTS */
+select, textarea {
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  transition: 0.2s;
+}
+
+select:focus, textarea:focus {
+  border-color: #f4a62a;
+  outline: none;
+}
+
+/* BOTÓN */
+.btn {
+  width: 100%;
+  background: linear-gradient(135deg, #f4a62a, #ffcc70);
+  border: none;
+  padding: 12px;
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.btn:hover {
+  transform: scale(1.03);
+}
+
+/* TABLA */
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+thead {
+  background: #f4f6f9;
+}
+
+th {
+  text-align: left;
+  padding: 12px;
+}
+
+td {
+  padding: 12px;
+  border-top: 1px solid #eee;
+}
+
+/* BADGE */
+.badge {
+  background: #4caf50;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 8px;
+  font-size: 12px;
+}

@@ -1,0 +1,75 @@
+<div class="main-container">
+  <div class="header-section">
+    <h2>Solicitudes de Movimiento de Bienes</h2>
+    <p>Gestión de reasignaciones y movimientos según el flujo de Logística</p>
+  </div>
+
+  <div class="grid-layout">
+    <div class="card form-card">
+      <h3>Nueva Solicitud</h3>
+      <form (submit)="enviarSolicitud()">
+        <div class="form-group">
+          <label>Bien / Activo a Movilizar</label>
+          <input type="text" [(ngModel)]="nuevaSol.bien" name="bien" placeholder="Ej. Computadora, Vehículo...">
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Tipo de Movimiento</label>
+            <select [(ngModel)]="nuevaSol.tipo" name="tipo">
+              <option *ngFor="let t of tiposMovimiento" [value]="t">{{ t }}</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Prioridad</label>
+            <select [(ngModel)]="nuevaSol.prioridad" name="prioridad">
+              <option value="Baja">Baja</option>
+              <option value="Normal">Normal</option>
+              <option value="Urgente">Urgente</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Ubicación o Persona Destino</label>
+          <input type="text" [(ngModel)]="nuevaSol.ubicacionDestino" name="destino" placeholder="¿A dónde se asigna?">
+        </div>
+
+        <div class="form-group">
+          <label>Motivo de la Solicitud</label>
+          <textarea [(ngModel)]="nuevaSol.motivo" name="motivo" rows="3"></textarea>
+        </div>
+
+        <button type="submit" class="btn-submit">Enviar a Revisión</button>
+      </form>
+    </div>
+
+    <div class="card table-card">
+      <h3>Seguimiento de Solicitudes (D2)</h3>
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Activo</th>
+              <th>Tipo</th>
+              <th>Estado</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let s of solicitudes">
+              <td><strong>{{ s.id }}</strong></td>
+              <td>{{ s.bien }}</td>
+              <td>{{ s.tipo }}</td>
+              <td>
+                <span class="status-badge" [ngClass]="s.estado.toLowerCase()">
+                  {{ s.estado }}
+                </span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

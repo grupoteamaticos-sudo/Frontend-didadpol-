@@ -1,0 +1,104 @@
+<div class="page-container">
+  <div class="card form-card">
+    <div class="card-header">
+      <h2 class="card-title">Registro de Mantenimiento</h2>
+      <p class="card-subtitle">Completa los datos para programar un nuevo mantenimiento</p>
+    </div>
+
+    <form class="maintenance-form">
+      <div class="form-row">
+        <div class="form-group">
+          <label>Activo / Bien</label>
+          <select name="bien" [(ngModel)]="form.bien">
+            <option value="">Seleccione un bien...</option>
+            <option *ngFor="let b of bienes" [value]="b">{{ b }}</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Tipo de mantenimiento</label>
+          <select name="tipo" [(ngModel)]="form.tipo">
+            <option value="">Seleccione...</option>
+            <option value="preventivo">Preventivo</option>
+            <option value="correctivo">Correctivo</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>Proveedor encargado</label>
+          <select name="proveedor" [(ngModel)]="form.proveedor">
+            <option value="">Seleccione proveedor...</option>
+            <option *ngFor="let p of proveedores" [value]="p">{{ p }}</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Fecha programada</label>
+          <input type="date" name="fecha" [(ngModel)]="form.fecha">
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>Kilometraje / Horas</label>
+          <input type="number" name="km" [(ngModel)]="form.km">
+        </div>
+        <div class="form-group">
+          <label>Costo estimado</label>
+          <input type="number" name="costo" [(ngModel)]="form.costo">
+        </div>
+      </div>
+
+      <div class="form-group full">
+        <label>Estado de orden</label>
+        <select name="estado" [(ngModel)]="form.estado">
+          <option value="programado">PROGRAMADO</option>
+          <option value="proceso">EN PROCESO</option>
+          <option value="finalizado">FINALIZADO</option>
+        </select>
+      </div>
+
+      <div class="form-group full">
+        <label>Descripción del trabajo</label>
+        <textarea name="descripcion" [(ngModel)]="form.descripcion" placeholder="¿Qué se le hará al bien?"></textarea>
+      </div>
+
+      <div class="form-actions">
+        <button type="button" class="btn btn-secondary" (click)="cancelar()">Cancelar</button>
+        <button type="button" class="btn btn-primary" (click)="guardar()">Guardar Mantenimiento</button>
+      </div>
+    </form>
+  </div>
+
+  <div class="card table-card">
+    <div class="card-header">
+      <h3 class="card-title">Mantenimientos Recientes</h3>
+    </div>
+    <div class="table-responsive">
+      <table class="custom-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Bien/Activo</th>
+            <th>Responsable</th>
+            <th>Fecha</th>
+            <th>Estado</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let m of lista">
+            <td><strong>{{ m.id }}</strong></td>
+            <td>{{ m.bien }}</td>
+            <td>{{ m.encargado }}</td>
+            <td>{{ m.fecha }}</td>
+            <td>
+              <span class="status-pill" [ngClass]="m.estado">
+                {{ m.estado | uppercase }}
+              </span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

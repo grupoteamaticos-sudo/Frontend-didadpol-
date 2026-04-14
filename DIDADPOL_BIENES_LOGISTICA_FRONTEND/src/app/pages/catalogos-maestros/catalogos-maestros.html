@@ -1,0 +1,60 @@
+<div class="modulo-container">
+
+  <h2 class="titulo">Catálogos y Maestros</h2>
+  <p class="subtitulo">Gestioná los datos base del sistema</p>
+
+  <!-- TABS -->
+  <div class="tabs">
+    <button (click)="catalogoSeleccionado='tipo_bien'">Tipo de Bien</button>
+    <button (click)="catalogoSeleccionado='departamento'">Departamento</button>
+  </div>
+
+  <div class="contenido">
+
+    <!-- FORMULARIO -->
+    <div class="card formulario">
+
+      <h3>Nuevo Registro</h3>
+
+      <div class="campo">
+        <label>Nombre</label>
+        <input [(ngModel)]="nuevoNombre" placeholder="Ej: Laptop" />
+      </div>
+
+      <button class="btn-guardar" (click)="agregar()">
+        Guardar
+      </button>
+
+    </div>
+
+    <!-- LISTADO -->
+    <div class="card listado">
+
+      <h3>Listado</h3>
+
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let item of listaActual">
+            <td>{{ item.id }}</td>
+            <td>{{ item.nombre }}</td>
+            <td>
+              <button (click)="eliminar(item.id)">Eliminar</button>
+            </td>
+          </tr>
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </div>
+
+</div>

@@ -1,0 +1,78 @@
+<div class="modulo-container">
+
+  <div class="header">
+    <h2>Asignación de Bienes</h2>
+    <p>Gestioná la entrega de bienes a empleados</p>
+  </div>
+
+  <div class="contenido">
+
+    <!-- FORMULARIO -->
+    <div class="card formulario">
+
+      <h3>Nueva Asignación</h3>
+
+      <div class="campo">
+        <label>Empleado</label>
+        <select [(ngModel)]="empleadoSeleccionado">
+          <option [ngValue]="null">Seleccione empleado</option>
+
+          <option *ngFor="let e of empleados" [ngValue]="e.id_empleado">
+            {{ e.primer_nombre }} {{ e.primer_apellido }}
+          </option>
+        </select>
+      </div>
+
+      <div class="campo">
+        <label>Bien</label>
+        <select [(ngModel)]="bienSeleccionado">
+          <option [ngValue]="null">Seleccione bien</option>
+
+          <option *ngFor="let b of bienes" [ngValue]="b.id_bien_item">
+            {{ b.nombre_bien }}
+          </option>
+        </select>
+      </div>
+
+      <div class="campo">
+        <label>Observaciones</label>
+        <textarea [(ngModel)]="observaciones" placeholder="Detalle de la asignación"></textarea>
+      </div>
+
+      <button class="btn" (click)="asignarBien()">
+        Asignar Bien
+      </button>
+
+    </div>
+
+    <!-- LISTADO -->
+    <div class="card listado">
+
+      <h3>Asignaciones Recientes</h3>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Empleado</th>
+            <th>Bien</th>
+            <th>Estado</th>
+            <th>Obs.</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let a of asignaciones">
+          <td>{{ a.empleado }}</td>
+          <td>{{ a.bien }}</td>
+          <td>Asignado</td>
+          <td>{{ a.observaciones }}</td>
+        </tr>
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </div>
+
+</div>

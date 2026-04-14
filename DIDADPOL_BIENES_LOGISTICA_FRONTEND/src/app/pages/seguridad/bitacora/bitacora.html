@@ -1,0 +1,67 @@
+<div class="card">
+  <h3>Bitácora</h3>
+
+  <table class="tbl">
+    <thead>
+      <tr>
+        <th style="width: 180px;">Fecha</th>
+        <th style="width: 120px;">Usuario</th>
+        <th style="width: 120px;">Tipo</th>
+        <th style="width: 220px;">Módulo</th>
+        <th>Detalle</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let e of events">
+
+        <!-- FECHA -->
+        <td class="mono">
+          {{ e.at }}
+        </td>
+
+        <!-- USUARIO -->
+        <td>
+          {{ e.user }}
+        </td>
+
+        <!-- TIPO -->
+        <td>
+          <span
+            class="badge"
+            [ngClass]="{
+              'ok': e.type === 'CREATE',
+              'warn': e.type === 'DELETE',
+              'info': e.type === 'UPDATE'
+            }"
+          >
+            {{ e.type }}
+          </span>
+        </td>
+
+        <!-- MODULO -->
+        <td class="muted">
+          {{ e.module }}
+        </td>
+
+        <!-- DETALLE -->
+        <td>
+          {{ e.detail }}
+        </td>
+
+      </tr>
+
+      <tr *ngIf="events.length === 0">
+        <td colspan="5" class="muted">
+          No hay eventos en la bitácora.
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div style="margin-top: 12px;">
+    <button class="btn" type="button" (click)="clear()">
+      Limpiar
+    </button>
+  </div>
+</div>

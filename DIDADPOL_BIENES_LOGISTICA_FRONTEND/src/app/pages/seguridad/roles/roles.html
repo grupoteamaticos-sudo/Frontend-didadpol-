@@ -1,0 +1,72 @@
+<div class="grid">
+
+  <!-- CREAR -->
+  <div class="card">
+    <h3>Crear rol</h3>
+
+    <div class="msg ok" *ngIf="msg">{{ msg }}</div>
+    <div class="msg err" *ngIf="err">{{ err }}</div>
+
+    <form class="form" [formGroup]="form" (ngSubmit)="create()">
+
+      <label>
+        Nombre del rol
+        <input formControlName="nombre_rol" />
+      </label>
+
+      <label>
+        Descripción
+        <input formControlName="descripcion_rol" />
+      </label>
+
+      <button class="btn" type="submit">Guardar</button>
+    </form>
+  </div>
+
+  <!-- LISTA -->
+  <div class="card">
+  <h3>Listado de roles</h3>
+
+  <div *ngIf="roles.length === 0" class="muted">
+    No hay roles registrados.
+  </div>
+
+  <div class="roles-table" *ngIf="roles.length > 0">
+
+    <div class="role-row header">
+      <div>Nombre</div>
+      <div>Descripción</div>
+      <div>Estado</div>
+      <div>Acciones</div>
+    </div>
+
+    <div
+      class="role-row"
+      *ngFor="let r of roles"
+      [class.active]="selectedRoleId === r.id"
+      (click)="selectRole(r.id)"
+    >
+      <div class="name">{{ r.name }}</div>
+
+      <div class="desc">
+        {{ r.description || '—' }}
+      </div>
+
+      <div class="estado">
+        <span class="badge" [class.ok]="r.activo">
+          {{ r.activo ? 'Activo' : 'Inactivo' }}
+        </span>
+      </div>
+
+      <div class="acciones">
+        <button
+          class="btn btn--danger"
+          (click)="deleteRole(r); $event.stopPropagation()"
+        >
+          Eliminar
+        </button>
+      </div>
+    </div>
+
+  </div>
+</div>

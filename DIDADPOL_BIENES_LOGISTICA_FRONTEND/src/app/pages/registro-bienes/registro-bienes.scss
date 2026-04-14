@@ -1,0 +1,126 @@
+.page {
+  max-width: 900px;
+  margin: auto;
+}
+
+.sub {
+  color: #666;
+  margin-bottom: 20px;
+}
+
+.card {
+  background: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+}
+
+h2 {
+  margin-bottom: 15px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+}
+
+.field label {
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+.field small {
+  font-size: 12px;
+  color: #777;
+  margin-top: 3px;
+}
+
+input, select, textarea {
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+.detalle {
+  margin-bottom: 20px;
+}
+
+.actions {
+  text-align: right;
+}
+
+.btn {
+  background: #f0a020;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.btn-primary {
+  background: #f0a020;
+  color: #000;
+  padding: 12px 20px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-danger {
+  background: #e74c3c;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.alerts {
+  margin-bottom: 15px;
+}
+
+.ok {
+  background: #d4edda;
+  padding: 10px;
+  border-radius: 6px;
+}
+
+.bad {
+  background: #f8d7da;
+  padding: 10px;
+  border-radius: 6px;
+}
+
+.acciones-detalle {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.acciones-detalle .btn {
+  background: #f0a020;
+  color: #000;
+}
+
+.acciones-detalle .btn-primary {
+  font-weight: 600;
+}
+
+/* Mejora visual botones */
+button {
+  transition: all 0.2s ease;
+}
+
+button:hover {
+  transform: translateY(-1px);
+  opacity: 0.9;
+}

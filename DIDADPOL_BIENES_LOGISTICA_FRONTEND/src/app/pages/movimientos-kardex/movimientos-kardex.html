@@ -1,0 +1,119 @@
+<div class="page">
+  <h1>Movimientos / Kardex</h1>
+  <p class="sub">
+    Consulta de movimientos de inventario generados automáticamente por el sistema.
+  </p>
+
+  <div class="alerts" *ngIf="msg || err">
+    <div class="ok" *ngIf="msg">{{ msg }}</div>
+    <div class="bad" *ngIf="err">{{ err }}</div>
+  </div>
+
+  <div class="grid">
+    <!-- Panel izquierdo -->
+    <div class="card">
+      <h2>Consulta</h2>
+
+      <div class="block">
+        <div class="label">Acciones</div>
+        <button class="btn" (click)="refresh()">Refrescar</button>
+      </div>
+
+      <div class="block">
+        <div class="label">Nota</div>
+        <div class="hint">
+          Los movimientos se generan automáticamente desde reservas, asignaciones,
+          traslados u otros procesos del sistema.
+        </div>
+      </div>
+    </div>
+
+    <!-- Tabla -->
+    <div class="card">
+      <div class="head">
+        <h2>Kardex</h2>
+
+        <div class="filters">
+          <input placeholder="Buscar..." [(ngModel)]="fText" />
+
+          <select [(ngModel)]="fType">
+            <option value="TODOS">Todos</option>
+            <option value="RESERVAR">RESERVAR</option>
+            <option value="LIBERAR">LIBERAR</option>
+            <option value="CONSUMIR">CONSUMIR</option>
+            <option value="ENTRADA">ENTRADA</option>
+            <option value="SALIDA">SALIDA</option>
+          </select>
+
+          <select [(ngModel)]="fWarehouseId">
+            <option value="TODOS">Todas las bodegas</option>
+            <option *ngFor="let w of warehouses" [value]="w.id">
+              {{ w.name }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div class="tableWrap">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Fecha</th>
+              <th>Tipo</th>
+              <th>Bien</th>
+              <th>Entrada</th>
+              <th>Salida</th>
+              <th>Saldo</th>
+              <th>Bodega</th>
+              <th>Usuario</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr *ngFor="let k of filtered()">
+
+              <td>{{ k.fecha | date:'short' }}</td>
+
+              <td>
+                <span class="badge"
+                  [ngClass]="{
+                    'in': k.entrada > 0,
+                    'out': k.salida > 0
+                  }">
+                  {{ k.tipo }}
+                </span>
+              </td>
+
+              <td>
+                {{ itemCode(k.id_bien) }} - {{ itemName(k.id_bien) }}
+              </td>
+
+              <td class="in">
+                {{ k.entrada > 0 ? k.entrada : '—' }}
+              </td>
+
+              <td class="out">
+                {{ k.salida > 0 ? k.salida : '—' }}
+              </td>
+
+              <td class="saldo">
+                {{ k.saldo }}
+              </td>
+
+              <td>{{ warehouseName(k.id_bodega) }}</td>
+
+              <td>{{ k.usuario || '—' }}</td>
+
+            </tr>
+
+            <tr *ngIf="filtered().length === 0">
+              <td colspan="8" class="empty">
+                No hay movimientos con esos filtros.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

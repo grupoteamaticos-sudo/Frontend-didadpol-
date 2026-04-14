@@ -1,0 +1,157 @@
+.grid {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 20px;
+}
+
+/* CARD */
+.card {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 18px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+/* TITULOS */
+.card h3 {
+  margin-bottom: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #1f2937;
+}
+
+/* MENSAJES */
+.msg {
+  padding: 10px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  font-size: 13px;
+}
+
+.msg.ok {
+  background: #e6f4ea;
+  color: #1e7e34;
+}
+
+.msg.err {
+  background: #fdecea;
+  color: #c62828;
+}
+
+/* FORM */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+label {
+  display: flex;
+  flex-direction: column;
+  font-size: 13px;
+  color: #374151;
+  gap: 4px;
+}
+
+/* INPUTS */
+input,
+select {
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+  font-size: 13px;
+  outline: none;
+  transition: 0.2s;
+}
+
+input:focus,
+select:focus {
+  border-color: #2563eb;
+}
+
+/* BOTONES */
+.btn {
+  margin-top: 10px;
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+  font-size: 13px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+/* BOTON PRINCIPAL (NARANJA DEL SISTEMA) */
+.btn {
+  background: #f59e0b;
+  color: #fff;
+}
+
+.btn:hover {
+  background: #d97706;
+}
+
+/* BOTON LINEA */
+.btn--line {
+  background: transparent;
+  border: 1px solid #d1d5db;
+  color: #374151;
+}
+
+.btn--line:hover {
+  background: #f3f4f6;
+}
+
+/* BOTON PELIGRO */
+.btn--danger {
+  background: #ef4444;
+  color: #fff;
+}
+
+.btn--danger:hover {
+  background: #dc2626;
+}
+
+/* TABLA */
+.tbl {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.tbl thead {
+  background: #f9fafb;
+}
+
+.tbl th {
+  text-align: left;
+  padding: 10px;
+  color: #6b7280;
+  font-weight: 600;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.tbl td {
+  padding: 10px;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+/* ESTADO */
+.badge {
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  background: #d1fae5;
+  color: #065f46;
+}
+
+.badge--off {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}

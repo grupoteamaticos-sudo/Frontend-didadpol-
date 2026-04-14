@@ -1,0 +1,133 @@
+.modulo-container {
+  padding: 25px;
+  background: #f4f6f9;
+  min-height: 100vh;
+}
+
+/* TITULOS */
+.titulo {
+  font-size: 26px;
+  font-weight: 700;
+  margin-bottom: 5px;
+}
+
+.subtitulo {
+  color: #777;
+  margin-bottom: 25px;
+}
+
+/* TABS */
+.tabs {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.tabs button {
+  background: #fff;
+  border: 1px solid #ddd;
+  padding: 8px 15px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.tabs button:hover {
+  background: #f4a62a;
+  color: white;
+}
+
+/* CONTENIDO */
+.contenido {
+  display: flex;
+  gap: 25px;
+}
+
+/* CARDS */
+.card {
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 12px;
+  flex: 1;
+  box-shadow: 0px 4px 12px rgba(0,0,0,0.05);
+}
+
+/* FORM */
+.formulario {
+  max-width: 350px;
+}
+
+.campo {
+  margin-bottom: 15px;
+}
+
+.campo label {
+  font-weight: 600;
+  margin-bottom: 5px;
+  display: block;
+}
+
+/* INPUT */
+.campo input {
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  transition: 0.2s;
+}
+
+.campo input:focus {
+  border-color: #f4a62a;
+  outline: none;
+}
+
+/* BOTON */
+.btn-guardar {
+  width: 100%;
+  background: linear-gradient(135deg, #f4a62a, #ffcc70);
+  border: none;
+  padding: 12px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.2s;
+}
+
+.btn-guardar:hover {
+  transform: scale(1.02);
+}
+
+/* TABLA */
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+thead {
+  background: #f4f6f9;
+}
+
+th {
+  text-align: left;
+  padding: 12px;
+  font-size: 14px;
+}
+
+td {
+  padding: 12px;
+  border-top: 1px solid #eee;
+}
+
+/* BOTON ELIMINAR */
+td button {
+  background: #ff4d4d;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 6px;
+  color: white;
+  cursor: pointer;
+}
+
+td button:hover {
+  background: #d93636;
+}

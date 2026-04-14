@@ -1,0 +1,97 @@
+<div class="grid">
+
+  <!-- ========================= -->
+  <!-- ASIGNACIÓN (IZQUIERDA) -->
+  <!-- ========================= -->
+  <div class="card">
+
+    <h3>Asignar permisos a usuario</h3>
+
+    <label>
+      Usuario
+      <select (change)="onUsuarioChange($event)">
+        <option value="">Seleccione</option>
+        <option *ngFor="let u of usuarios" [value]="u.id_usuario">
+          {{ u.nombre_usuario }}
+        </option>
+      </select>
+    </label>
+
+    <div class="muted" *ngIf="usuarioSeleccionado">
+      Rol: {{ usuarioSeleccionado?.roles?.[0]?.nombre_rol || '—' }}
+    </div>
+
+    <hr class="sep" />
+
+    <div *ngIf="usuarioSeleccionado">
+
+      <table class="tbl">
+        <thead>
+          <tr>
+            <th style="width: 60px;"> ✔ </th>
+            <th>Nombre</th>
+            <th>Code</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let p of permisos">
+            <td>
+              <input
+                type="checkbox"
+                [checked]="hasPerm(p.id)"
+                (change)="togglePerm(p.id)"
+              />
+            </td>
+
+            <td>{{ p.name }}</td>
+
+            <td class="code">{{ p.code }}</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="actions">
+        <button class="btn" (click)="guardarPermisos()">
+          Guardar cambios
+        </button>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- ========================= -->
+<!-- LISTADO (DERECHA) -->
+<!-- ========================= -->
+<div class="card">
+  <h3>Listado de permisos</h3>
+
+  <table class="tbl">
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Code</th>
+        <th>Estado</th>
+        <th style="width: 130px;">Acciones</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let p of permisos">
+        <td>{{ p.name }}</td>
+        <td class="code">{{ p.code }}</td>
+        <td>
+          <span class="estado activo">ACTIVO</span>
+        </td>
+        <td>
+          <button
+            class="btn btn--danger"
+            (click)="delete(p)">
+            Eliminar
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

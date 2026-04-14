@@ -1,0 +1,124 @@
+<div class="grid">
+
+  <!-- FORM -->
+  <div class="card">
+    <h3>Crear Empleado</h3>
+
+    <div class="msg ok" *ngIf="msg">{{ msg }}</div>
+    <div class="msg err" *ngIf="err">{{ err }}</div>
+
+    <form [formGroup]="form" (ngSubmit)="submit()" class="form">
+
+      <!-- PERSONA -->
+      <label>
+        Persona
+        <input
+          type="text"
+          placeholder="Buscar persona..."
+          (input)="filtrarPersonas($event)"
+        />
+
+        <select formControlName="id_persona">
+          <option value="">Seleccione</option>
+          <option *ngFor="let p of personasFiltradas" [value]="p.id_persona">
+            {{ p.nombre_completo }}
+          </option>
+        </select>
+      </label>
+
+      <!-- CODIGO -->
+      <label>
+        Código
+        <input type="text" formControlName="codigo_empleado" />
+      </label>
+
+      <!-- DEPARTAMENTO -->
+      <label>
+        Departamento
+        <select formControlName="id_departamento">
+          <option value="">Seleccione</option>
+          <option *ngFor="let d of departamentos" [value]="d.id_departamento">
+            {{ d.nombre_departamento }}
+          </option>
+        </select>
+      </label>
+
+      <!-- PUESTO -->
+      <label>
+        Puesto
+        <select formControlName="id_puesto">
+          <option value="">Seleccione</option>
+          <option *ngFor="let p of puestos" [value]="p.id_puesto">
+            {{ p.nombre_puesto }}
+          </option>
+        </select>
+      </label>
+
+      <!-- SUCURSAL -->
+      <label>
+        Sucursal
+        <select formControlName="id_sucursal">
+          <option value="">Seleccione</option>
+          <option *ngFor="let s of sucursales" [value]="s.id_sucursal">
+            {{ s.nombre_sucursal }}
+          </option>
+        </select>
+      </label>
+
+      <!-- ESTATUS -->
+      <label>
+        Estatus
+        <select formControlName="id_estatus_empleado">
+          <option [value]="1">ACTIVO</option>
+          <option [value]="2">INACTIVO</option>
+        </select>
+      </label>
+
+      <!-- FECHA -->
+      <label>
+        Fecha ingreso
+        <input type="date" formControlName="fecha_ingreso" />
+      </label>
+
+      <button class="btn" type="submit">Guardar</button>
+    </form>
+  </div>
+
+  <!-- 🔥 BLOQUE NUEVO -->
+  <div *ngIf="mostrarCrearUsuario" class="card">
+    <h3>Empleado creado</h3>
+    <p>¿Deseas crear un usuario para este empleado?</p>
+
+    <button class="btn" type="button" (click)="irCrearUsuario()">
+      Crear usuario ahora
+    </button>
+  </div>
+
+  <!-- TABLA -->
+  <div class="card">
+    <h3>Listado Empleados</h3>
+
+    <table class="tbl">
+      <thead>
+        <tr>
+          <th>Código</th>
+          <th>Persona</th>
+          <th>Departamento</th>
+          <th>Puesto</th>
+          <th>Estado</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let e of empleados">
+          <td>{{ e.codigo_empleado }}</td>
+          <td>{{ e.nombre }}</td>
+          <td>{{ e.nombre_departamento }}</td>
+          <td>{{ e.nombre_puesto }}</td>
+          <td>{{ e.estado_empleado }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>

@@ -1,0 +1,74 @@
+<div class="grid">
+
+  <div class="card">
+    <h3>Crear persona</h3>
+
+    <div class="msg ok" *ngIf="msg">{{ msg }}</div>
+    <div class="msg err" *ngIf="err">{{ err }}</div>
+
+    <form class="form" [formGroup]="form" (ngSubmit)="submit()">
+
+      <!-- NOMBRES -->
+      <label>
+        Primer nombre
+        <input type="text" formControlName="primer_nombre" />
+      </label>
+
+      <label>
+        Segundo nombre
+        <input type="text" formControlName="segundo_nombre" />
+      </label>
+
+      <!-- APELLIDOS -->
+      <label>
+        Primer apellido
+        <input type="text" formControlName="primer_apellido" />
+      </label>
+
+      <label>
+        Segundo apellido
+        <input type="text" formControlName="segundo_apellido" />
+      </label>
+
+      <!-- IDENTIDAD -->
+      <label>
+        Identidad
+        <input type="text" formControlName="identidad" />
+      </label>
+
+      <!-- FECHA -->
+      <label>
+        Fecha nacimiento
+        <input type="date" formControlName="fecha_nacimiento" />
+      </label>
+
+      <!-- SEXO -->
+      <label>
+        Sexo
+        <select formControlName="sexo">
+          <option value="">—</option>
+          <option value="M">Masculino</option>
+          <option value="F">Femenino</option>
+        </select>
+      </label>
+
+      <!-- TELÉFONO -->
+      <label>
+        Teléfono
+        <input type="text" formControlName="numero" placeholder="Ej: 99999999" />
+      </label>
+
+      <!-- CORREO -->
+      <label>
+        Correo
+        <input type="email" formControlName="correo" placeholder="correo@email.com" />
+      </label>
+
+      <button class="btn" type="submit">
+        Guardar
+      </button>
+
+    </form>
+  </div>
+
+</div>

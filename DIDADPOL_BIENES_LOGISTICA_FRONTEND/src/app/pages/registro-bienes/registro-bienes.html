@@ -1,0 +1,216 @@
+<div class="page">
+
+  <h1>Registro de Bienes</h1>
+  <p class="sub">
+    Registra el ingreso, salida o ajuste de bienes en el sistema.
+  </p>
+
+  <div class="alerts" *ngIf="msg || err">
+    <div class="ok" *ngIf="msg">{{ msg }}</div>
+    <div class="bad" *ngIf="err">{{ err }}</div>
+  </div>
+
+  <form [formGroup]="form" (ngSubmit)="submit()" class="form">
+
+    <div class="card">
+      <h2>Registro de bienes</h2>
+
+      <!-- GENERAL -->
+      <div class="row">
+
+        <div class="field">
+          <label>Tipo de registro</label>
+          <select formControlName="tipoRegistro">
+            <option *ngFor="let t of tiposRegistro" [value]="t">
+              {{ t }}
+            </option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label>Bodega</label>
+          <select formControlName="id_bodega">
+            <option value="">Seleccione una bodega</option>
+            <option *ngFor="let w of warehouses" [value]="w.id">
+              {{ w.name }}
+            </option>
+          </select>
+        </div>
+
+      </div>
+
+      <div class="row">
+
+        <div class="field">
+          <label>Proveedor</label>
+          <input formControlName="proveedor" placeholder="Ej: Proveedor XYZ" />
+        </div>
+
+        <div class="field">
+          <label>Documento</label>
+          <input formControlName="documento" placeholder="Ej: Factura #12345" />
+        </div>
+
+      </div>
+
+      <div class="field">
+        <label>Descripción</label>
+        <textarea formControlName="descripcion" placeholder="Descripción del movimiento..."></textarea>
+      </div>
+
+      <hr />
+
+      <!-- DETALLE -->
+      <h3>Detalle de bienes</h3>
+
+      <div formArrayName="detalles">
+
+        <div
+          class="detalle"
+          *ngFor="let d of detallesFA.controls; let i = index"
+          [formGroupName]="i"
+        >
+
+          <div class="field">
+            <label>Bien</label>
+            <select (change)="onSelectBien($event, i)">
+              <option value="">Seleccione un bien</option>
+              <option *ngFor="let b of catalogoBienes" [value]="b.id_bien">
+                {{ b.codigo_inventario }} - {{ b.nombre_bien }}
+              </option>
+            </select>
+          </div>
+
+          <div class="row">
+
+            <div class="field">
+              <label>Código</label>
+              <input formControlName="codigo" readonly placeholder="Se completa automáticamente" />
+            </div>
+
+            <div class="field">
+              <label>Nombre</label>
+              <input formControlName="nombre" readonly placeholder="Se completa automáticamente" />
+            </div>
+
+          </div>
+
+          <div class="row">
+
+            <div class="field">
+              <label>Tipo</label>
+              <select formControlName="tipo">
+                <option *ngFor="let t of tiposBien" [value]="t">
+                  {{ t }}
+                </option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label>Cantidad</label>
+              <input type="number" formControlName="cantidad" min="1" placeholder="Ej: 10" />
+            </div>
+
+          </div>
+
+          <div class="field">
+            <label>Nota</label>
+            <input formControlName="nota" placeholder="Opcional: observaciones del bien" />
+          </div>
+
+          <button
+            type="button"
+            class="btn-danger"
+            (click)="removeDetalle(i)"
+            [disabled]="detallesFA.length === 1"
+          >
+            Quitar
+          </button>
+
+          <hr />
+
+        </div>
+      </div>
+
+      <div class="acciones-detalle">
+        <button type="button" class="btn" (click)="addDetalle()">
+          + Agregar otro bien
+        </button>
+
+        <button type="submit" class="btn-primary">
+          Guardar registro
+        </button>
+      </div>
+
+    </div>
+
+    <!-- CREAR BIEN -->
+    <div class="card">
+      <h2>Crear nuevo bien</h2>
+
+      <div class="row">
+
+        <div class="field">
+          <label>Código</label>
+          <input
+            name="codigoNuevo"
+            [(ngModel)]="nuevoBien.codigo_inventario"
+            [ngModelOptions]="{ standalone: true }"
+            placeholder="Ej: BIEN-001"
+          />
+        </div>
+
+        <div class="field">
+          <label>Nombre</label>
+          <input
+            name="nombreNuevo"
+            [(ngModel)]="nuevoBien.nombre_bien"
+            [ngModelOptions]="{ standalone: true }"
+            placeholder="Ej: Laptop Dell"
+          />
+        </div>
+
+      </div>
+
+      <div class="row">
+
+        <div class="field">
+          <label>Marca</label>
+          <input
+            name="marcaNuevo"
+            [(ngModel)]="nuevoBien.marca"
+            [ngModelOptions]="{ standalone: true }"
+            placeholder="Ej: Dell"
+          />
+        </div>
+
+        <div class="field">
+          <label>Modelo</label>
+          <input
+            name="modeloNuevo"
+            [(ngModel)]="nuevoBien.modelo"
+            [ngModelOptions]="{ standalone: true }"
+            placeholder="Ej: Latitude 5420"
+          />
+        </div>
+
+      </div>
+
+      <div class="field">
+        <label>Valor</label>
+        <input
+          type="number"
+          name="valorNuevo"
+          [(ngModel)]="nuevoBien.valor_unitario"
+          [ngModelOptions]="{ standalone: true }"
+          placeholder="Ej: 15000"
+        />
+      </div>
+
+      <button type="button" (click)="guardarBien()" class="btn-primary">
+        Crear bien
+      </button>
+    </div>
+
+  </form>
+</div>
